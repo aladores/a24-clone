@@ -24,7 +24,7 @@ function autoChangeImage() {
 
 function startInterval() {
     clearInterval(intervalId);
-    intervalId = setInterval(autoChangeImage, 4000);
+    intervalId = setInterval(autoChangeImage, 5000);
 }
 
 //Start the slideshow
