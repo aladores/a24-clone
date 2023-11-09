@@ -1,66 +1,117 @@
+/* DEFAULTS */
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
 body {
     font-family: 'Inter', sans-serif;
-}
-
-.movie-preview {
-    position: relative;
-    min-height: 100vh;
-    overflow-x: hidden;
 
 }
 
-.movie-preview-container {
+/* HEADER */
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
-    overflow-x: hidden;
-}
-
-.movie-preview-image {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    transform: scale(1.01);
-}
-
-.movie-preview-image-1 {
-    position: absolute;
-    z-index: 0;
-}
-
-.movie-preview-image-2 {
-    position: absolute;
-    visibility: hidden;
-    z-index: 1;
-}
-
-.movie-preview-image-3 {
-    position: absolute;
-    visibility: hidden;
-    z-index: 2;
-}
-
-.movie-preview-list-links {
     color: white;
+    padding: 4rem;
     position: absolute;
     z-index: 99;
+    align-items: center;
 }
 
-.movie-preview-list-links {
-    padding: 1rem;
-}
-
-.movie-preview-list-item {
-    font-size: 24px;
+.header>div {
     cursor: pointer;
 }
 
+.header>div:hover {
+    color: rgb(163, 163, 163);
+}
+
+.header-left {
+    justify-self: start;
+}
+
+.header-center {
+    justify-self: center;
+}
+
+.header-logo {
+    height: 25px;
+}
+
+.header-right {
+    justify-self: end;
+}
+
+/* MOVIE PREVIEW */
+.movie-preview {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.movie-preview-image {
+    position: absolute;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    transform: scale(1.05);
+    filter: blur(0);
+    /* Initial state: no blur */
+    transition: filter 1s ease-in-out;
+    /* Add a smooth transition for the 'filter' property */
+}
+
+.movie-preview-bottom {
+    position: absolute;
+    bottom: 0;
+    z-index: 99;
+    padding: 4rem;
+}
+
+
+.movie-preview-list-item {
+    display: flex;
+    gap: 1rem;
+    color: white;
+    cursor: pointer;
+    width: fit-content;
+
+}
+
+.movie-preview-list-item>h1 {
+    font-size: 48px;
+    font-weight: 500;
+}
+
+
+.movie-preview-list-item>p {
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: normal;
+}
+
 .movie-preview-list-item:hover {
-    color: grey;
+    color: rgb(163, 163, 163);
 }
 
 .show {
     visibility: visible;
+    filter: blur(0);
+}
+
+.active {
+    color: rgb(163, 163, 163);
 }
 
 .hidden {
     visibility: hidden;
+    filter: blur(5px);
 }
