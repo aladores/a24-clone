@@ -41,7 +41,7 @@ body {
     justify-self: end;
 }
 
-/* MOVIE PREVIEW */
+/* MOVIE PREVIEW IMAGE */
 .movie-preview {
     position: relative;
     min-height: 100vh;
@@ -67,7 +67,7 @@ body {
     padding: 4rem;
 }
 
-
+/* MOVIE PREVIEW LIST */
 .movie-preview-list-item {
     display: flex;
     gap: 1rem;
