@@ -93,10 +93,13 @@ const mobileModule = (function () {
         if (!initialized) {
             moviePreviewWrapper.addEventListener('touchstart', (e) => {
                 touchStartY = e.touches[0].clientY;
+                e.preventDefault();
+
             });
 
             moviePreviewWrapper.addEventListener('touchmove', (e) => {
                 touchEndY = e.touches[0].clientY;
+                e.preventDefault();
             });
 
             moviePreviewWrapper.addEventListener('touchend', () => {
