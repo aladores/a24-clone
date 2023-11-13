@@ -84,6 +84,8 @@ const mobileModule = (function () {
     let touchStartY = 0;
     let touchEndY = 0;
     let initialized = false;
+    let wheelTimer;
+    let wheelEnabled = true
 
     function initMobile() {
 
@@ -99,21 +101,43 @@ const mobileModule = (function () {
 
             moviePreviewWrapper.addEventListener('touchend', () => {
                 if (!isDesktopWidth()) {
-                    handleTouchGesture();
+                    handleTouchGesture("touch");
                 }
             });
 
+            moviePreviewWrapper.addEventListener("wheel", (e) => {
+                if (!isDesktopWidth() && wheelEnabled) {
+                    wheelEnabled = false;
+                    clearTimeout(wheelTimer);
+                    wheelTimer = setTimeout(() => {
+                        wheelEnabled = true;
+                    }, 1200);
+                    console.log(e);
+                    handleTouchGesture("wheel", e.deltaY);
+                }
+            });
             initialized = true;
         }
     }
 
-    function handleTouchGesture() {
-        const difference = touchStartY - touchEndY;
-        if (difference > 100 && mobileIndex < movieListLinks.length - 1) {
-            changeMobileFeatured(mobileIndex + 1);
-        } else if (difference < -100 && mobileIndex > 0) {
-            changeMobileFeatured(mobileIndex - 1);
+    function handleTouchGesture(type, delta) {
+        if (type === "touch") {
+            const difference = touchStartY - touchEndY;
+            if (difference > 100 && mobileIndex < movieListLinks.length - 1) {
+                changeMobileFeatured(mobileIndex + 1);
+            } else if (difference < -100 && mobileIndex > 0) {
+                changeMobileFeatured(mobileIndex - 1);
+            }
         }
+        else if (type === "wheel") {
+            if (delta > 0 && mobileIndex < movieListLinks.length - 1) {
+                changeMobileFeatured(mobileIndex + 1);
+            } else if (delta < 0 && mobileIndex > 0) {
+                console.log("going up");
+                changeMobileFeatured(mobileIndex - 1);
+            }
+        }
+
     }
 
     function changeMobileFeatured(nextPosition) {
