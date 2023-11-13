@@ -29,11 +29,30 @@
         </div>
     </header>
     <main>
-        <section class="movie-preview">
-            <img class="movie-preview-image show" src="assets/tc/tc.webp" alt="People staring into a camera">
-            <img class="movie-preview-image hidden" src="assets/adr/adr.webp" alt="People staring into the horizon">
-            <img class="movie-preview-image hidden" src="assets/tzoi/tzoi.webp"
-                alt="People hanging out in the backyard">
+        <section class="movie-preview-wrapper">
+            <figure class="movie-preview-container">
+                <img class="movie-preview-image show" src="assets/tc/tc.webp" alt="People staring into a camera">
+                <figcaption class="movie-preview-mobile-title show">
+                    <h1>The Curse</h1>
+                    <p>2023</p>
+                </figcaption>
+            </figure>
+            <figure class="movie-preview-container">
+                <img class="movie-preview-image hidden" src="assets/adr/adr.webp" alt="People staring into the horizon">
+                <div class="movie-preview-mobile-title hidden">
+                    <h1>All Dirt Roads Taste of Salt</h1>
+                    <p>2023</p>
+                </div>
+            </figure>
+            <figure class="movie-preview-container">
+                <img class="movie-preview-image hidden" src="assets/tzoi/tzoi.webp"
+                    alt="People hanging out in the backyard">
+                <div class="movie-preview-mobile-title hidden">
+                    <h1>The Zone Of Interest</h1>
+                    <p>2023</p>
+                </div>
+            </figure>
+
             <div class="movie-preview-bottom">
                 <ul class="movie-preview-list">
                     <li class="movie-preview-list-item active">
@@ -50,10 +69,8 @@
                     </li>
                 </ul>
             </div>
+
         </section>
-        <!-- <div>
-            Other
-        </div> -->
     </main>
     <script src="script.js"></script>
 </body>
