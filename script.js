@@ -112,7 +112,6 @@ const mobileModule = (function () {
                     wheelTimer = setTimeout(() => {
                         wheelEnabled = true;
                     }, 1200);
-                    console.log(e);
                     handleTouchGesture("wheel", e.deltaY);
                 }
             });
@@ -133,7 +132,6 @@ const mobileModule = (function () {
             if (delta > 0 && mobileIndex < movieListLinks.length - 1) {
                 changeMobileFeatured(mobileIndex + 1);
             } else if (delta < 0 && mobileIndex > 0) {
-                console.log("going up");
                 changeMobileFeatured(mobileIndex - 1);
             }
         }
