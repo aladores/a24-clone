@@ -151,6 +151,10 @@ body {
         filter: blur(0);
     }
 
+    .movie-preview-wrapper {
+        min-height: 100svh;
+    }
+
     .movie-preview-bottom {
         display: none;
     }
