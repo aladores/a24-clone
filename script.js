@@ -3,10 +3,11 @@ let lethargy = new Lethargy(5, 120, 0.05);
 const movieImageSources = ["assets/tc/tc.webp", "assets/adr/adr.webp", "assets/tzoi/tzoi.webp"];
 const movieGifSources = ["assets/tc/tc_gif.gif", "assets/adr/adr_gif.gif", "assets/tzoi/tzoi_gif.gif"];
 const moviePreviewWrapper = document.querySelector(".movie-preview-wrapper");
-const movieListLinks = document.querySelectorAll(".movie-preview-list-item");
-const movieListImages = document.querySelectorAll(".movie-preview-image");
-const movieListMobile = document.querySelectorAll(".movie-preview-mobile-title");
+const movieTitles = document.querySelectorAll(".movie-preview-title-container ");
+const movieImages = document.querySelectorAll(".movie-preview-image");
+const movieMobileTitles = document.querySelectorAll(".movie-preview-mobile-title");
 const positionIndicator = document.querySelector(".position-indicator");
+
 const desktopModule = (function () {
     let index = 0;
     let intervalId;
@@ -15,11 +16,11 @@ const desktopModule = (function () {
     function initDesktop() {
         resetToDesktopView();
         if (!initialized) {
-            for (let i = 0; i < movieListLinks.length; i++) {
+            for (let i = 0; i < movieTitles.length; i++) {
                 if (isDesktopWidth())
-                    movieListLinks[i].addEventListener("mouseover", () => {
+                    movieTitles[i].addEventListener("mouseover", () => {
                         changeFeatured(i);
-                        movieListImages[i].src = movieGifSources[i];
+                        movieImages[i].src = movieGifSources[i];
                         resetInterval();
                         intervalId = setInterval(autoChangeImage, 4000);
                     });
@@ -30,35 +31,34 @@ const desktopModule = (function () {
 
     function changeFeatured(nextPosition) {
         // Hide current image/gif
-        movieListImages[index].classList.remove("show");
-        movieListImages[index].classList.add("hidden");
-        movieListLinks[index].classList.remove("active");
-
+        movieImages[index].classList.remove("show");
+        movieImages[index].classList.add("hidden");
+        movieTitles[index].classList.remove("active");
         // Show selected image/gif
         // If image is a gif change it back to the original image
-        if (movieListImages[nextPosition].src != movieImageSources[nextPosition]) {
-            movieListImages[nextPosition].src = movieImageSources[nextPosition];
+        if (movieImages[nextPosition].src != movieImageSources[nextPosition]) {
+            movieImages[nextPosition].src = movieImageSources[nextPosition];
         }
-        movieListImages[nextPosition].classList.add("show");
-        movieListImages[nextPosition].classList.remove("hidden");
-        movieListLinks[nextPosition].classList.add("active");
+        movieImages[nextPosition].classList.add("show");
+        movieImages[nextPosition].classList.remove("hidden");
+        movieTitles[nextPosition].classList.add("active");
         index = nextPosition;
     }
 
 
     function resetToDesktopView() {
-        for (let i = 0; i < movieListImages.length; i++) {
+        for (let i = 0; i < movieImages.length; i++) {
             //Hide all images that is not the current desktop index
             if (i !== index) {
-                movieListImages[i].classList.remove("show");
-                movieListImages[i].classList.add("hidden");
+                movieImages[i].classList.remove("show");
+                movieImages[i].classList.add("hidden");
             }
         }
         //Start at desktop index 
-        movieListImages[index].classList.add("show");
-        movieListImages[index].classList.remove("hidden");
-        movieListLinks[index].classList.add("show");
-        movieListLinks[index].classList.remove("hidden");
+        movieImages[index].classList.add("show");
+        movieImages[index].classList.remove("hidden");
+        movieTitles[index].classList.add("show");
+        movieTitles[index].classList.remove("hidden");
 
         resetInterval();
         intervalId = setInterval(autoChangeImage, 4000);
@@ -66,7 +66,7 @@ const desktopModule = (function () {
 
 
     function autoChangeImage() {
-        const nextIndex = (index + 1) % movieListLinks.length;
+        const nextIndex = (index + 1) % movieTitles.length;
         changeFeatured(nextIndex);
     }
 
@@ -128,7 +128,7 @@ const mobileModule = (function () {
     function handleTouchGesture(type, delta) {
         if (type === "touch") {
             const difference = touchStartY - touchEndY;
-            if (difference > 100 && mobileIndex < movieListLinks.length - 1) {
+            if (difference > 100 && mobileIndex < movieTitles.length - 1) {
                 changeMobileFeatured(mobileIndex + 1);
                 changePositionIndicator("next");
             } else if (difference < -100 && mobileIndex > 0) {
@@ -137,7 +137,7 @@ const mobileModule = (function () {
             }
         }
         else if (type === "wheel") {
-            if (delta > 0 && mobileIndex < movieListLinks.length - 1) {
+            if (delta > 0 && mobileIndex < movieTitles.length - 1) {
                 changeMobileFeatured(mobileIndex + 1);
                 changePositionIndicator("next");
             } else if (delta < 0 && mobileIndex > 0) {
@@ -148,13 +148,13 @@ const mobileModule = (function () {
     }
 
     function changeMobileFeatured(nextPosition) {
-        movieListImages[mobileIndex].classList.remove("show");
-        movieListImages[mobileIndex].classList.add("hidden");
-        movieListMobile[mobileIndex].classList.add("hidden");
+        movieImages[mobileIndex].classList.remove("show");
+        movieImages[mobileIndex].classList.add("hidden");
+        movieMobileTitles[mobileIndex].classList.add("hidden");
 
-        movieListImages[nextPosition].classList.add("show");
-        movieListImages[nextPosition].classList.remove("hidden");
-        movieListMobile[nextPosition].classList.remove("hidden");
+        movieImages[nextPosition].classList.add("show");
+        movieImages[nextPosition].classList.remove("hidden");
+        movieMobileTitles[nextPosition].classList.remove("hidden");
 
         mobileIndex = nextPosition;
     }
@@ -165,10 +165,10 @@ const mobileModule = (function () {
         const positionMax = positionIndicator.querySelector(".position-max");
         const positionArrow = positionIndicator.querySelector(".position-arrow");
         const currentHeight = positionLine.offsetHeight;
-        const incrementHeight = Math.round(maxLineHeight / movieListImages.length - 1);
+        const incrementHeight = Math.round(maxLineHeight / movieImages.length - 1);
         let newHeight;
 
-        if (movieListImages.length - 1 === mobileIndex) {
+        if (movieImages.length - 1 === mobileIndex) {
             newHeight = 0;
             positionMax.classList.add("display-none");
             positionArrow.classList.remove("hidden");
@@ -184,22 +184,22 @@ const mobileModule = (function () {
     }
 
     function resetToMobileView() {
-        for (let i = 0; i < movieListImages.length; i++) {
+        for (let i = 0; i < movieImages.length; i++) {
             //Reset all gifs to images
-            if (movieListImages[i].src != movieImageSources[i]) {
-                movieListImages[i].src = movieImageSources[i];
+            if (movieImages[i].src != movieImageSources[i]) {
+                movieImages[i].src = movieImageSources[i];
             }
             //Hide all images that is not the current mobile index
             if (i !== mobileIndex) {
-                movieListImages[i].classList.remove("show");
-                movieListImages[i].classList.add("hidden");
+                movieImages[i].classList.remove("show");
+                movieImages[i].classList.add("hidden");
             }
         }
         //Start at mobile index 
-        movieListImages[mobileIndex].classList.add("show");
-        movieListImages[mobileIndex].classList.remove("hidden");
-        movieListMobile[mobileIndex].classList.add("show");
-        movieListMobile[mobileIndex].classList.remove("hidden");
+        movieImages[mobileIndex].classList.add("show");
+        movieImages[mobileIndex].classList.remove("hidden");
+        movieMobileTitles[mobileIndex].classList.add("show");
+        movieMobileTitles[mobileIndex].classList.remove("hidden");
     }
 
     return {

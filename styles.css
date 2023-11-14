@@ -6,21 +6,13 @@ body {
 /* HEADER */
 .header {
     display: grid;
+    align-items: center;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 100%;
-    color: white;
-    padding: 4rem;
     position: absolute;
     z-index: 99;
-    align-items: center;
-}
-
-.header>div {
-    cursor: pointer;
-}
-
-.header>div:hover {
-    color: rgb(163, 163, 163);
+    width: 100%;
+    padding: 2rem;
+    color: white;
 }
 
 .header-left {
@@ -31,12 +23,44 @@ body {
     justify-self: center;
 }
 
+.header-right {
+    justify-self: end;
+}
+
+.header>div {
+    cursor: pointer;
+}
+
+.header>div:hover {
+    color: rgb(163, 163, 163);
+}
+
 .header-logo {
     height: 25px;
 }
 
-.header-right {
-    justify-self: end;
+/* MOVIE PREVIEW */
+.show {
+    visibility: visible;
+    filter: blur(0px);
+}
+
+.hidden {
+    visibility: hidden;
+    filter: blur(10px);
+}
+
+.active {
+    opacity: 0.5;
+}
+
+.display-none {
+    display: none;
+}
+
+.movie-preview-link {
+    color: white;
+    text-decoration: none;
 }
 
 /* MOVIE PREVIEW IMAGE */
@@ -52,39 +76,33 @@ body {
     height: 100%;
     width: 100%;
     transform: scale(1.05);
-    filter: blur(0);
-    /* Initial state: no blur */
     transition: filter 1.5s ease-in;
-    /* Add a smooth transition for the 'filter' property */
 }
 
+/* MOVIE PREVIEW LINKS*/
 .movie-preview-bottom {
     position: absolute;
     bottom: 0;
     z-index: 99;
-    padding: 4rem;
+    padding-left: 2rem;
+    padding-bottom: 3rem;
 }
 
-.movie-preview-mobile-title {
-    display: none;
-}
-
-/* MOVIE PREVIEW LIST */
-.movie-preview-list-item {
+.movie-preview-title-container>a {
     display: flex;
     gap: 1rem;
     color: white;
     cursor: pointer;
     width: fit-content;
-
+    text-decoration: none;
 }
 
-.movie-preview-list-item>h1 {
+.movie-preview-title {
     font-size: 60px;
     font-weight: 500;
 }
 
-.movie-preview-list-item>p {
+.movie-preview-year {
     font-family: monospace;
     font-size: 14px;
     font-weight: normal;
@@ -94,38 +112,28 @@ body {
     color: rgb(163, 163, 163);
 }
 
-.position-indicator {
-    display: none;
-}
-
-.show {
-    visibility: visible;
-    filter: blur(0);
-}
-
-.active {
-    opacity: 0.5;
-}
-
-
-.hidden {
-    visibility: hidden;
-    filter: blur(10px);
-}
-
+/* MOBILE DEFAULTS ON DESKTOP VIEW */
 .movie-preview-list-item-mobile {
     display: none;
 }
 
+.movie-preview-mobile-title {
+    display: none;
+}
+
+.position-indicator {
+    display: none;
+}
+
 @media (max-width: 1299px) {
-    .movie-preview-list-item>h1 {
+    .movie-preview-title {
         font-size: 48px;
         font-weight: 500;
     }
 }
 
 @media (max-width: 1020px) {
-    .movie-preview-list-item>h1 {
+    .movie-preview-title {
         font-size: 36px;
         font-weight: 400;
     }
@@ -136,9 +144,9 @@ body {
         padding: 2rem;
     }
 
-    .movie-preview-list-item>h1 {
+    /* .movie-preview-title {
         font-size: 24px;
-    }
+    } */
 
     .movie-preview-bottom {
         position: absolute;
@@ -153,27 +161,25 @@ body {
         padding: 1.5rem 1rem 1rem 1rem;
     }
 
-    .hidden {
-        filter: blur(0);
-    }
-
     .movie-preview-wrapper {
         min-height: 100svh;
-    }
-
-    /* For TC */
-    .movie-preview-wrapper>.movie-preview-container:first-child>.movie-preview-image {
-        object-position: 20%;
     }
 
     .movie-preview-bottom {
         display: none;
     }
 
+    .hidden {
+        filter: blur(0px);
+    }
+
+    /* CUSTOM IMAGE POSITION -- MOVIE: THE CURSE */
+    .movie-preview-wrapper>.movie-preview-container:first-child>.movie-preview-image {
+        object-position: 20%;
+    }
+
     .movie-preview-mobile-title {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        display: block;
         position: absolute;
         bottom: 0;
         padding-left: 1rem;
@@ -183,15 +189,19 @@ body {
         z-index: 99;
     }
 
-    .movie-preview-mobile-title>h1 {
+    .movie-preview-mobile-title>a {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .movie-preview-title {
         font-size: 42px;
         font-weight: 500;
     }
 
-    .movie-preview-mobile-title>p {
+    .movie-preview-year {
         font-size: 14px;
-        font-family: monospace;
-        font-weight: normal;
     }
 
     .position-indicator {
@@ -199,28 +209,24 @@ body {
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
+
         position: absolute;
         z-index: 99;
         bottom: 0;
         right: 0;
+
         padding-bottom: 2rem;
         padding-right: 1rem;
         color: white;
     }
 
     .position-line {
-        height: 40px;
+        height: 60px;
         border-left: 1px solid white;
         transition: height 0.3s ease-in;
     }
 
     .position-arrow {
         fill: white;
-    }
-
-
-    .display-none {
-        display: none;
-        transition: all 0.3s ease-in;
     }
 }
