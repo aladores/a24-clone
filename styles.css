@@ -94,6 +94,10 @@ body {
     color: rgb(163, 163, 163);
 }
 
+.position-indicator {
+    display: none;
+}
+
 .show {
     visibility: visible;
     filter: blur(0);
@@ -102,6 +106,7 @@ body {
 .active {
     opacity: 0.5;
 }
+
 
 .hidden {
     visibility: hidden;
@@ -156,6 +161,11 @@ body {
         min-height: 100svh;
     }
 
+    /* For TC */
+    .movie-preview-wrapper>.movie-preview-container:first-child>.movie-preview-image {
+        object-position: 20%;
+    }
+
     .movie-preview-bottom {
         display: none;
     }
@@ -182,5 +192,35 @@ body {
         font-size: 14px;
         font-family: monospace;
         font-weight: normal;
+    }
+
+    .position-indicator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        position: absolute;
+        z-index: 99;
+        bottom: 0;
+        right: 0;
+        padding-bottom: 4rem;
+        padding-right: 1rem;
+        color: white;
+    }
+
+    .position-line {
+        height: 40px;
+        border-left: 1px solid white;
+        transition: height 0.3s ease-in;
+    }
+
+    .position-arrow {
+        fill: white;
+    }
+
+
+    .display-none {
+        display: none;
+        transition: all 0.3s ease-in;
     }
 }

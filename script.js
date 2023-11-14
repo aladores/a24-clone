@@ -1,3 +1,4 @@
+let lethargy = new Lethargy(5, 120, 0.05);
 //0.adr, 1. tc, 2. tzoi
 const movieImageSources = ["assets/tc/tc.webp", "assets/adr/adr.webp", "assets/tzoi/tzoi.webp"];
 const movieGifSources = ["assets/tc/tc_gif.gif", "assets/adr/adr_gif.gif", "assets/tzoi/tzoi_gif.gif"];
@@ -5,8 +6,7 @@ const moviePreviewWrapper = document.querySelector(".movie-preview-wrapper");
 const movieListLinks = document.querySelectorAll(".movie-preview-list-item");
 const movieListImages = document.querySelectorAll(".movie-preview-image");
 const movieListMobile = document.querySelectorAll(".movie-preview-mobile-title");
-let lethargy = new Lethargy();
-
+const positionIndicator = document.querySelector(".position-indicator");
 const desktopModule = (function () {
     let index = 0;
     let intervalId;
@@ -87,6 +87,7 @@ const mobileModule = (function () {
     let initialized = false;
     let wheelTimer;
     let wheelEnabled = true;
+    const maxLineHeight = 60;
     function initMobile() {
 
         resetToMobileView();
@@ -121,7 +122,6 @@ const mobileModule = (function () {
                 }
             });
             initialized = true;
-
         }
     }
 
@@ -137,11 +137,12 @@ const mobileModule = (function () {
         else if (type === "wheel") {
             if (delta > 0 && mobileIndex < movieListLinks.length - 1) {
                 changeMobileFeatured(mobileIndex + 1);
+                changePositionIndicator("next");
             } else if (delta < 0 && mobileIndex > 0) {
                 changeMobileFeatured(mobileIndex - 1);
+                changePositionIndicator("prev");
             }
         }
-
     }
 
     function changeMobileFeatured(nextPosition) {
@@ -154,6 +155,30 @@ const mobileModule = (function () {
         movieListMobile[nextPosition].classList.remove("hidden");
 
         mobileIndex = nextPosition;
+    }
+
+    function changePositionIndicator(command) {
+        const currentPosition = positionIndicator.querySelector(".current-position");
+        const positionLine = positionIndicator.querySelector(".position-line");
+        const positionMax = positionIndicator.querySelector(".position-max");
+        const positionArrow = positionIndicator.querySelector(".position-arrow");
+        const currentHeight = positionLine.offsetHeight;
+        const incrementHeight = Math.round(maxLineHeight / movieListImages.length - 1);
+        let newHeight;
+
+        if (movieListImages.length - 1 === mobileIndex) {
+            newHeight = 0;
+            positionMax.classList.add("display-none");
+            positionArrow.classList.remove("hidden");
+        }
+        else {
+            newHeight = (command === "next") ? currentHeight - incrementHeight : currentHeight + incrementHeight;
+            positionMax.classList.remove("display-none");
+            positionArrow.classList.add("hidden");
+        }
+
+        currentPosition.innerText = `${mobileIndex + 1}`;
+        positionLine.style.height = `${newHeight}px`;
     }
 
     function resetToMobileView() {
