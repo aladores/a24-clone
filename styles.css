@@ -1,5 +1,6 @@
 body {
     font-family: 'Inter', sans-serif;
+    overscroll-behavior-y: contain;
 }
 
 /* HEADER */
@@ -166,14 +167,14 @@ body {
         position: absolute;
         bottom: 0;
         padding-left: 1rem;
-        padding-bottom: 10rem;
+        padding-bottom: 3rem;
         width: 300px;
         color: white;
         z-index: 99;
     }
 
     .movie-preview-mobile-title>h1 {
-        font-size: 48px;
+        font-size: 42px;
         font-weight: 500;
     }
 

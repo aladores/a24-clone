@@ -5,6 +5,7 @@ const moviePreviewWrapper = document.querySelector(".movie-preview-wrapper");
 const movieListLinks = document.querySelectorAll(".movie-preview-list-item");
 const movieListImages = document.querySelectorAll(".movie-preview-image");
 const movieListMobile = document.querySelectorAll(".movie-preview-mobile-title");
+let lethargy = new Lethargy();
 
 const desktopModule = (function () {
     let index = 0;
@@ -85,8 +86,7 @@ const mobileModule = (function () {
     let touchEndY = 0;
     let initialized = false;
     let wheelTimer;
-    let wheelEnabled = true
-
+    let wheelEnabled = true;
     function initMobile() {
 
         resetToMobileView();
@@ -94,7 +94,6 @@ const mobileModule = (function () {
             moviePreviewWrapper.addEventListener('touchstart', (e) => {
                 touchStartY = e.touches[0].clientY;
                 e.preventDefault();
-
             });
 
             moviePreviewWrapper.addEventListener('touchmove', (e) => {
@@ -109,16 +108,20 @@ const mobileModule = (function () {
             });
 
             moviePreviewWrapper.addEventListener("wheel", (e) => {
-                if (!isDesktopWidth() && wheelEnabled) {
-                    wheelEnabled = false;
-                    clearTimeout(wheelTimer);
-                    wheelTimer = setTimeout(() => {
-                        wheelEnabled = true;
-                    }, 1200);
-                    handleTouchGesture("wheel", e.deltaY);
+                e.preventDefault();
+                if (lethargy.check(e)) {
+                    if (!isDesktopWidth() && wheelEnabled) {
+                        wheelEnabled = false;
+                        clearTimeout(wheelTimer);
+                        wheelTimer = setTimeout(() => {
+                            wheelEnabled = true;
+                        }, 300);
+                        handleTouchGesture("wheel", e.deltaY);
+                    };
                 }
             });
             initialized = true;
+
         }
     }
 
