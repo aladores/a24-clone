@@ -130,8 +130,10 @@ const mobileModule = (function () {
             const difference = touchStartY - touchEndY;
             if (difference > 100 && mobileIndex < movieListLinks.length - 1) {
                 changeMobileFeatured(mobileIndex + 1);
+                changePositionIndicator("next");
             } else if (difference < -100 && mobileIndex > 0) {
                 changeMobileFeatured(mobileIndex - 1);
+                changePositionIndicator("prev");
             }
         }
         else if (type === "wheel") {
