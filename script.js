@@ -137,7 +137,7 @@ const mobileModule = (function () {
 
             testSection.addEventListener('touchend', () => {
                 const difference = touchStartY - touchEndY;
-                if (difference > 100) {
+                if (difference > 50) {
                     if (window.scrollY === 0 && moviePreviewWrapper.classList.contains("hide")) {
                         moviePreviewWrapper.classList.remove("hide");
                     }
