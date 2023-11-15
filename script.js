@@ -7,6 +7,7 @@ const movieTitles = document.querySelectorAll(".movie-preview-title-container ")
 const movieImages = document.querySelectorAll(".movie-preview-image");
 const movieMobileTitles = document.querySelectorAll(".movie-preview-mobile-title");
 const positionIndicator = document.querySelector(".position-indicator");
+const testSection = document.querySelector(".test-sections");
 
 const desktopModule = (function () {
     let index = 0;
@@ -92,6 +93,8 @@ const mobileModule = (function () {
 
         resetToMobileView();
         if (!initialized) {
+
+            //For changing carousel image and hiding carousel
             moviePreviewWrapper.addEventListener('touchstart', (e) => {
                 touchStartY = e.touches[0].clientY;
                 e.preventDefault();
@@ -104,7 +107,7 @@ const mobileModule = (function () {
 
             moviePreviewWrapper.addEventListener('touchend', () => {
                 if (!isDesktopWidth()) {
-                    handleTouchGesture("touch");
+                    handleMobileGesture("touch");
                 }
             });
 
@@ -117,23 +120,46 @@ const mobileModule = (function () {
                         wheelTimer = setTimeout(() => {
                             wheelEnabled = true;
                         }, 300);
-                        handleTouchGesture("wheel", e.deltaY);
+                        handleMobileGesture("wheel", e.deltaY);
                     };
+                }
+            });
+
+            //For showing carousel only
+            testSection.addEventListener('wheel', (e) => {
+                setTimeout(() => {
+                    if (window.scrollY === 0 && moviePreviewWrapper.classList.contains("hide")) {
+                        console.log(e);
+                        moviePreviewWrapper.classList.remove("hide");
+                    }
+                }, 100)
+            });
+
+            testSection.addEventListener('touchend', () => {
+                const difference = touchStartY - touchEndY;
+                if (difference > 100) {
+                    if (window.scrollY === 0 && moviePreviewWrapper.classList.contains("hide")) {
+                        moviePreviewWrapper.classList.remove("hide");
+                    }
                 }
             });
             initialized = true;
         }
     }
 
-    function handleTouchGesture(type, delta) {
+    function handleMobileGesture(type, delta) {
         if (type === "touch") {
             const difference = touchStartY - touchEndY;
             if (difference > 100 && mobileIndex < movieTitles.length - 1) {
                 changeMobileFeatured(mobileIndex + 1);
                 changePositionIndicator("next");
-            } else if (difference < -100 && mobileIndex > 0) {
+            }
+            else if (difference < -100 && mobileIndex > 0) {
                 changeMobileFeatured(mobileIndex - 1);
                 changePositionIndicator("prev");
+            }
+            else if (difference > 100 && mobileIndex === movieTitles.length - 1) {
+                moviePreviewWrapper.classList.add("hide");
             }
         }
         else if (type === "wheel") {
@@ -143,6 +169,9 @@ const mobileModule = (function () {
             } else if (delta < 0 && mobileIndex > 0) {
                 changeMobileFeatured(mobileIndex - 1);
                 changePositionIndicator("prev");
+            }
+            else if (delta > 0 && mobileIndex === movieTitles.length - 1) {
+                moviePreviewWrapper.classList.add("hide");
             }
         }
     }
