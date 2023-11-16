@@ -2,6 +2,10 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.white-fill {
+    fill: white;
+}
+
 /* HEADER */
 .header {
     display: grid;
@@ -26,16 +30,29 @@ body {
     justify-self: end;
 }
 
-.header>div {
+.header-logo {
+    height: 25px;
     cursor: pointer;
 }
 
-.header>div:hover {
-    color: rgb(163, 163, 163);
+.header-button:hover>svg {
+    fill: rgb(163, 163, 163);
 }
 
-.header-logo {
-    height: 25px;
+.clear-button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.clear-button:focus {
+    border: 1px solid blue;
+    outline: 1px solid white;
+}
+
+.main {
+    position: relative;
 }
 
 /* MOVIE PREVIEW */
@@ -252,10 +269,6 @@ body {
         height: 60px;
         border-left: 1px solid white;
         transition: height 0.3s ease-in;
-    }
-
-    .position-arrow {
-        fill: white;
     }
 }
 

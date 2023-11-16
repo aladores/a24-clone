@@ -19,16 +19,30 @@
 <body>
     <header class="header">
         <div class="header-left">
-            MENU
+            <button class="header-button clear-button">
+                <svg class="white-fill" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                    clip-rule="evenodd">
+                    <path d="M24 18v1h-24v-1h24zm0-6v1h-24v-1h24zm0-6v1h-24v-1h24z" fill="#1040e2" />
+                    <path d="M24 19h-24v-1h24v1zm0-6h-24v-1h24v1zm0-6h-24v-1h24v1z" />
+                </svg>
+            </button>
         </div>
         <div class="header-center">
-            <img class="header-logo" src="assets/a24_logo.webp">
+            <a href="https://aladores.github.io/a24-clone/">
+                <img class="header-logo" src="assets/a24_logo.webp">
+            </a>
         </div>
         <div class="header-right">
-            SEARCH
+            <button class="header-button clear-button">
+                <svg class="white-fill" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                    clip-rule="evenodd">
+                    <path
+                        d="M15.853 16.56c-1.683 1.517-3.911 2.44-6.353 2.44-5.243 0-9.5-4.257-9.5-9.5s4.257-9.5 9.5-9.5 9.5 4.257 9.5 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zm-6.353-15.56c4.691 0 8.5 3.809 8.5 8.5s-3.809 8.5-8.5 8.5-8.5-3.809-8.5-8.5 3.809-8.5 8.5-8.5z" />
+                </svg>
+            </button>
         </div>
     </header>
-    <main>
+    <main class="main">
         <section class="movie-preview-wrapper">
             <figure class="movie-preview-container">
                 <img class="movie-preview-image show" src="assets/tc/tc.webp" alt="People staring into a camera">
@@ -63,7 +77,7 @@
                 <p class="current-position">1</p>
                 <div class="position-line"></div>
                 <p class="position-max">3</p>
-                <svg class="position-arrow hidden" width="16" height="16" viewBox="0 0 24 24">
+                <svg class="position-arrow white-fill hidden" width="16" height="16" viewBox="0 0 24 24">
                     <path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" />
                 </svg>
             </div>
