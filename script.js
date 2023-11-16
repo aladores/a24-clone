@@ -129,7 +129,6 @@ const mobileModule = (function () {
             testSection.addEventListener('wheel', (e) => {
                 setTimeout(() => {
                     if (window.scrollY === 0 && moviePreviewWrapper.classList.contains("hide")) {
-                        console.log(e);
                         moviePreviewWrapper.classList.remove("hide");
                     }
                 }, 100)

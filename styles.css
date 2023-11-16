@@ -176,7 +176,26 @@ body {
         display: none;
     }
 
+    .show {
+        visibility: visible;
+        filter: blur(0px);
+        animation-name: zoom-in;
+        animation-duration: 0.5s;
+
+    }
+
+    @keyframes zoom-in {
+        0% {
+            transform: scale(1.025);
+        }
+
+        100% {
+            transform: scale(1.05);
+        }
+    }
+
     .hidden {
+        visibility: hidden;
         filter: blur(0px);
     }
 
@@ -185,6 +204,7 @@ body {
         object-position: 20%;
     }
 
+    /* MOBILE MOVIE TITLE */
     .movie-preview-mobile-title {
         display: block;
         position: absolute;
@@ -211,6 +231,7 @@ body {
         font-size: 14px;
     }
 
+    /* POSITION INDICATOR */
     .position-indicator {
         display: flex;
         flex-direction: column;
