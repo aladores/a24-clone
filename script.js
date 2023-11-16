@@ -7,7 +7,7 @@ const movieTitles = document.querySelectorAll(".movie-preview-title-container ")
 const movieImages = document.querySelectorAll(".movie-preview-image");
 const movieMobileTitles = document.querySelectorAll(".movie-preview-mobile-title");
 const positionIndicator = document.querySelector(".position-indicator");
-const testSection = document.querySelector(".test-sections");
+const homeSection = document.querySelector(".home-content");
 
 const desktopModule = (function () {
     let index = 0;
@@ -126,7 +126,7 @@ const mobileModule = (function () {
             });
 
             //For showing carousel only
-            testSection.addEventListener('wheel', (e) => {
+            homeSection.addEventListener('wheel', (e) => {
                 setTimeout(() => {
                     if (window.scrollY === 0 && moviePreviewWrapper.classList.contains("hide")) {
                         moviePreviewWrapper.classList.remove("hide");
@@ -134,7 +134,7 @@ const mobileModule = (function () {
                 }, 100)
             });
 
-            testSection.addEventListener('touchend', () => {
+            homeSection.addEventListener('touchend', () => {
                 const difference = touchStartY - touchEndY;
                 if (difference > 50) {
                     if (window.scrollY === 0 && moviePreviewWrapper.classList.contains("hide")) {
